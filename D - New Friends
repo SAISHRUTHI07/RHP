@@ -1,0 +1,49 @@
+#include<iostream>
+#include<vector>
+#include<algorithm>
+#define ll long long int
+using namespace std;
+int find(vector<int> &ldr,int node){
+	if(ldr[node]!=node){
+	ldr[node]=find(ldr,ldr[node]);
+	}
+	return ldr[node];
+}
+void join(vector<int> &ldr,int lt,int rt){
+	ldr[find(ldr,rt)]=find(ldr,lt);
+}
+void solve(){
+	int n,e;
+	cin>>n>>e;
+	vector<int> ldr(n+1);
+	for(int node=1;node<=n;node++){
+		ldr[node]=node;
+	}	
+	vector<int> edges(e);
+	for(int i=0;i<e;i++){
+		int a,b;
+		cin>>a>>b;
+		edges[i]=a;
+		join(ldr,a,b);
+	}
+	vector<int>gcnt(n+1,0),ecnt(n+1,0);
+	for(int node=1;node<=n;node++){
+		gcnt[find(ldr,node)]++;
+	}
+	for(int a:edges){
+		ecnt[find(ldr,a)]++;
+	}
+	ll ans=0;
+	for(int node=1;node<=n;node++){
+		ll curr=(1LL*gcnt[node]*(gcnt[node]-1))/2-ecnt[node];
+		ans+=curr;
+	}
+	cout<<ans;
+}
+int main(){
+	ios::sync_with_stdio(false);
+	cin.tie(0);
+	int tc=1;
+	while(tc--)
+	solve();
+}
