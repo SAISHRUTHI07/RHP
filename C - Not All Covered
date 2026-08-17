@@ -1,0 +1,19 @@
+import java.util.*;
+public class Main{
+  public static void main(String args[]){
+    Scanner sc=new Scanner(System.in);
+    int n=sc.nextInt(),m=sc.nextInt();
+    int psum[]=new int[n+2];
+    while(m-- > 0){
+      int from=sc.nextInt(),to=sc.nextInt();
+      psum[from]++;
+      psum[to+1]--;
+    }
+    int minv=Integer.MAX_VALUE;
+    for(int w=1;w<=n;w++){
+      psum[w]+=psum[w-1];
+      minv=Math.min(minv,psum[w]);
+    }
+    System.out.println(minv);
+  }
+}
