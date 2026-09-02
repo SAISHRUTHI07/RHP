@@ -1,0 +1,32 @@
+#include<iostream>
+#include<algorithm>
+#include<map>
+#include<queue>
+#include<vector>
+using namespace std;
+#define ll unsigned long long int
+void solve(){
+	int n,k;
+	cin>>n>>k;
+	vector<int> cnt(k+1,0);
+	for(int s=1;s<=n;s++){
+		int c1;
+		cin>>c1;
+		cnt[c1]++;
+	}
+	int maxi=*max_element(cnt.begin(),cnt.end());
+	int canjoin=0;
+	for(int c1=1;c1<=k;c1++){
+		if(cnt[c1]>=maxi-1){
+			canjoin++;
+		}
+	}
+	cout<<canjoin<<endl;
+}
+int main(){
+	ios::sync_with_stdio(false);
+	cin.tie(0);
+	int tc=1;
+	while(tc--)
+	solve();
+}
