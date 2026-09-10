@@ -12,7 +12,7 @@ void solve(){
   int count=0;
   sort(a.begin(),a.end());
   sort(b.begin(),b.end());
-  for(int ai=M-1,bi=N-1;a1>=0 && bi>=0;){
+  for(int ai=M-1,bi=N-1;ai>=0 && bi>=0;){
     if(b[bi]<=a[ai]*2){
       count++;bi--; ai--;
     }else{
